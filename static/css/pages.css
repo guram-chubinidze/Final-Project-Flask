@@ -1,0 +1,25 @@
+/* Hero სექცია (Index & About) */
+.hero-section { 
+    background: linear-gradient(135deg, #212529 0%, #343a40 100%); 
+    color: white; 
+    padding: 3rem 0; 
+    border-radius: 0.5rem; 
+    margin-bottom: 2rem;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+/* ავტორიზაცია და ერორები (Center Card Layout) */
+.auth-wrapper, .error-wrapper {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* პროფილის ავატარი */
+.profile-avatar {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border: 3px solid #198754;
+}

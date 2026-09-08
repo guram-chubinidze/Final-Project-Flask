@@ -1,0 +1,19 @@
+{% macro render_field(field) %}
+
+<div class="mb-3 text-start">
+    {{ field.label(class="form-label small fw-semibold") }}
+
+    {# ველს ავტომატურად ვუმატებთ is-invalid კლასს, თუ შეცდომა აქვს #}
+    {{ field(class="form-control" + (" is-invalid" if field.errors else "")) }}
+
+    {# შეცდომების გამოჩენა #}
+    {% if field.errors %}
+    <div class="invalid-feedback d-block">
+        {% for error in field.errors %}
+        <span>{{ error }}</span>
+        {% endfor %}
+    </div>
+    {% endif %}
+</div>
+
+{% endmacro %}

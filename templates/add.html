@@ -1,93 +1,95 @@
-<!DOCTYPE html>
-<html lang="ka">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Recipe - RecipeHub</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-</head>
-<body class="bg-light d-flex flex-column min-vh-100">
+{% extends "layouts/base.html" %}
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
-        <div class="container">
-            <a class="navbar-brand text-success" href="#"><i class="bi bi-journal-richtext"></i> RecipeHub</a>
-            <div class="ms-auto">
-                <a class="btn btn-outline-light btn-sm" href="#">Back to Home</a>
-            </div>
+{% block content %}
+{% from "helpers/_myform.html" import render_field %}
+<form id="post-form" method="POST">
+    <!-- აუცილებელი CSRF ტოკენი Flask-WTF-ისთვის -->
+    {{ form.hidden_tag() }}
+    <div class="row">
+        <div class="mb-3">
+            <label class="form-label fw-semibold small text-secondary">Recipe Title</label>
+            {{ form.title(class="form-control", placeholder="e.g., Classic Italian Lasagna") }}
         </div>
-    </nav>
+    </div>
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <label class="form-label fw-semibold small text-secondary">Category</label>
+            {{ form.category(class="form-select") }}
+        </div>
+        <div class="col-md-6 mb-3">
+            <label class="form-label fw-semibold small text-secondary">Prep & Cook Time</label>
+            {{ form.prep_time(class="form-control", placeholder="e.g., 45 mins") }}
+        </div>
+    </div>
 
-    <main class="container my-5 flex-fill">
-        <div class="row justify-content-center">
-            <div class="col-lg-8">
-                <div class="card shadow-sm p-4 border-0 rounded-4">
-                    <h2 class="fw-bold text-dark mb-4">Add New Recipe</h2>
-                    
-                    <form>
-                        <div class="mb-3">
-                            <label class="form-label fw-semibold small text-secondary">Recipe Title</label>
-                            <input type="text" class="form-control" placeholder="e.g., Classic Italian Lasagna">
-                        </div>
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <label class="form-label fw-semibold small text-secondary">Servings</label>
+            {{ form.servings(class="form-control", placeholder="e.g., 4") }}
+        </div>
+        <div class="col-md-6 mb-3">
+            <label class="form-label fw-semibold small text-secondary">Image URL</label>
+            {{ form.image_url(class="form-control", placeholder="https://image-link.com") }}
+        </div>
+    </div>
+    
+    <div class="row">
+    <div class="mb-3">
+        <label class="form-label fw-semibold small text-secondary">YouTube Video URL (Optional)</label>
+        {{ form.youtube_url(class="form-control", placeholder="https://www.youtube.com/watch?v=...") }}
+    </div>
+</div>
+<div class="row">
+    <div class="mb-3">
+        <label class="form-label fw-semibold small text-secondary">Short Description</label>
+        {{ form.short_desc(class="form-control", rows=2, placeholder="Brief summary...") }}
+    </div>
+</div>
+<div class="row">
+    <div class="mb-3">
+        <label class="form-label fw-semibold small text-secondary">Full Recipe / Instructions</label>
+        {% if recipe %}
+        <div id="full-recipe" style="height: 200px; background-color: white;">{{ recipe.full_recipe | safe }}</div>
+        {% else %}
+        <div id="full-recipe" style="height: 200px; background-color: white;"></div>
+        {% endif %}
 
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label fw-semibold small text-secondary">Category</label>
-                                <select class="form-select">
-                                    <option selected>Choose category...</option>
-                                    <option value="breakfast">Breakfast</option>
-                                    <option value="lunch">Lunch</option>
-                                    <option value="dinner">Dinner</option>
-                                    <option value="dessert">Dessert</option>
-                                    <option value="vegan">Vegan</option>
-                                </select>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label fw-semibold small text-secondary">Prep & Cook Time</label>
-                                <input type="text" class="form-control" placeholder="e.g., 45 mins">
-                            </div>
-                        </div>
+        {{ form.full_recipe(id="full_recipe", class="form-control d-none", required=False) }}
+    </div>
+    </div>
+   
 
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label fw-semibold small text-secondary">Servings</label>
-                                <input type="number" class="form-control" placeholder="e.g., 4">
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label fw-semibold small text-secondary">Image URL</label>
-                                <input type="url" class="form-control" placeholder="https://image-link.com">
-                            </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label fw-semibold small text-secondary">YouTube Video URL (Optional)</label>
-                            <input type="url" class="form-control" placeholder="https://www.youtube.com/watch?v=...">
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label fw-semibold small text-secondary">Short Description</label>
-                            <textarea class="form-control" rows="2" placeholder="Brief summary of the recipe..."></textarea>
-                        </div>
-
-                        <div class="mb-4">
-                            <label class="form-label fw-semibold small text-secondary">Full Recipe / Instructions</label>
-                            <textarea class="form-control" rows="6" placeholder="Step-by-step instructions and ingredients list..."></textarea>
-                        </div>
-
-                        <div class="d-flex justify-content-end gap-2">
-                            <a href="#" class="btn btn-outline-secondary px-4">Cancel</a>
-                            <button type="submit" class="btn btn-success px-4 fw-semibold">Publish Recipe</button>
-                        </div>
-                    </form>
+    <!-- ინგრედიენტების სექცია -->
+    <div class="mb-4 border-top pt-3">
+        <label class="form-label fw-bold text-dark mb-3">Ingredients</label>
+        <div id="ingredients-container">
+            {% for ing_form in form.ingredients %}
+            <div class="row g-2 mb-2 ingredient-row align-items-end">
+                <div class="col-md-7">
+                    <label class="form-label small text-muted mb-1">Ingredient Name</label>
+                    <!-- ing_form.form.name ნაცვლად გამოიყენეთ ქვემოთ მოცემული სინტაქსი -->
+                    {{ ing_form.form.name(class="form-control", placeholder="e.g. Flour") }}
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label small text-muted mb-1">Amount</label>
+                    {{ ing_form.form.amount(class="form-control", placeholder="e.g. 500g") }}
+                </div>
+                <div class="col-md-1 d-flex align-items-center">
+                    <button type="button" class="btn btn-outline-danger btn-sm w-100 remove-ing" title="Remove">
+                        <i class="bi bi-x-lg"></i>
+                    </button>
                 </div>
             </div>
+            {% endfor %}
         </div>
-    </main>
+        <button type="button" id="add-ingredient" class="btn btn-outline-success btn-sm mt-2">
+            <i class="bi bi-plus-lg me-1"></i> Add Ingredient
+        </button>
+    </div>
 
-    <footer class="bg-dark text-muted text-center py-4">
-        <div class="container"><p class="mb-0">&copy; 2026 RecipeHub</p></div>
-    </footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+    <div class="d-flex justify-content-end gap-2">
+        <a href="{{ url_for('index') }}" class="btn btn-outline-secondary px-4">Cancel</a>
+        {{ form.submit(class="btn btn-success px-4 fw-semibold") }}
+    </div>
+</form>
+{% endblock %}

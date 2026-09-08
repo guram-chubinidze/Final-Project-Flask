@@ -1,0 +1,30 @@
+<div class="hero-section px-4 p-5 text-center">
+    <h1 class="display-5 fw-bold">Explore Delicious Recipes</h1>
+    <p class="lead text-info">Discover, cook, and share amazing homemade dishes everyday.</p>
+    <div class="row justify-content-center mt-4">
+     <form method="GET" action="{{ url_for('index') }}" class="row g-2">
+                <!-- ძებნის ველი -->
+                <div class="col-md-5">
+                    <input type="text" name="search" class="form-control" placeholder="Search recipe..." value="{{ current_search }}">
+                </div>
+                
+                <!-- კატეგორიების დროპდაუნი -->
+                <div class="col-md-4">
+                    <select name="category" class="form-select">
+                        <option value="">All Categories</option>
+                        {% for cat in categories %}
+                            <option value="{{ cat }}" {% if current_category == cat %}selected{% endif %}>{{ cat }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                
+                <!-- ღილაკები -->
+                <div class="col-md-3 d-flex gap-1">
+                    <button type="submit" class="btn btn-success w-100">Filter</button>
+                    <a href="{{ url_for('index') }}" class="btn btn-outline-secondary" title="Reset">
+                        <i class="bi bi-arrow-counterclockwise"></i>
+                    </a>
+                </div>
+            </form>
+    </div>
+</div>

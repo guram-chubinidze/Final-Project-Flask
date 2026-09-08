@@ -1,0 +1,26 @@
+<!-- Bootstrap 5 Delete Confirmation Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title fw-bold" id="deleteModalLabel">
+                    <i class="bi bi-exclamation-triangle-fill me-2"></i>წაშლის დადასტურება
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body py-4">
+                <p class="mb-0 fs-5 text-secondary">
+                    დარწმუნებული ხართ რომ გსურთ <strong id="itemNameToDelete" class="text-dark"></strong>-ის წაშლა?
+                </p>
+                <small class="text-muted mt-2 d-block">ეს მოქმედება შეუექცევადია!</small>
+            </div>
+            <div class="modal-footer bg-light">
+                <button type="button" class="btn btn-secondary px-4" data-bs-dismiss="modal">გაუქმება</button>
+                <button type="button" class="btn btn-danger px-4" id="confirmDeleteBtn">
+                    <i class="bi bi-trash me-1"></i> წაშლა
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

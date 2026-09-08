@@ -1,0 +1,27 @@
+<div class="row justify-content-center text-center">
+            <div class="col-lg-6">
+                <div class="card p-5 shadow-sm border-0 rounded-4 bg-white">
+                    <!-- ცარიელი ბლოკნოტის / წიგნის ილუსტრაცია იუმორით -->
+                    <div class="mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z" fill="#f8f9fa"/>
+                            <path d="M6 6h8" stroke="#94a3b8"/>
+                            <path d="M6 10h6" stroke="#94a3b8"/>
+                            <!-- მოწყენილი სახე ან გადახაზული კალამი -->
+                            <circle cx="13" cy="15" r="2" fill="#e2e8f0"/>
+                            <path d="M11.5 14.5l3 3" stroke="#94a3b8"/>
+                        </svg>
+                    </div>
+
+                    <h2 class="fw-bold text-dark mb-2">აქ ჯერ არაფერი იხარშება!</h2>
+                    <p class="text-muted mb-4">როგორც ჩანს, ამ კატეგორიაში ან თქვენს პროფილში ჯერ რეცეპტები არ არის დამატებული. ბლოკნოტი სრულიად სუფთაა.</p>
+                    
+                    <div class="d-flex justify-content-center gap-2">
+                        <a href="{{ url_for('index') }}" class="btn btn-outline-dark rounded-pill-custom px-4 py-2 fw-semibold">Explore Recipes</a>
+                        <a href="{{ url_for('add_recipe') }}" class="btn btn-success rounded-pill-custom px-4 py-2 fw-semibold shadow-sm">
+                            <i class="bi bi-plus-lg me-1"></i> Add First Recipe
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>

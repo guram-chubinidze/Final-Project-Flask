@@ -1,5 +1,9 @@
+import os
+from dotenv import load_dotenv
+# ეს ხაზი კითხულობს .env ფაილს და ტვირთავს სისტემურ ცვლადებში
+load_dotenv()
 class Config:
     
-    SECRET_KEY = 'a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6'
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///notes.db'
+    SECRET_KEY =  os.environ.get('SECRET_KEY')  
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///recipehub.db'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
